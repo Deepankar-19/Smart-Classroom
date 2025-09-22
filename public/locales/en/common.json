@@ -1,0 +1,53 @@
+{
+  "onboarding": {
+    "welcome": {
+      "title": "Welcome to EduFlow",
+      "description": "Your all-in-one smart classroom management system. Let's take a quick tour of the features available to you."
+    },
+    "role": {
+      "title": "Choose Your Role",
+      "description": "Select between Student, Teacher, or Admin to access role-specific features and dashboards."
+    },
+    "timetable": {
+      "title": "Dynamic Timetable",
+      "description": "Access AI-powered scheduling with automatic conflict resolution and real-time updates."
+    },
+    "transcription": {
+      "title": "Class Transcription",
+      "description": "Never miss a lecture with our automated recording and transcription feature."
+    },
+    "attendance": {
+      "title": "Real-time Attendance",
+      "description": "Track attendance with live updates and comprehensive historical data."
+    },
+    "buttons": {
+      "next": "Next",
+      "previous": "Previous",
+      "getStarted": "Get Started"
+    }
+  },
+  "languageSelector": {
+    "selectLanguage": "Select language",
+    "english": "English",
+    "hindi": "Hindi",
+    "santali": "Santali",
+    "error": "Translation service error"
+  },
+  "roles": {
+    "student": {
+      "title": "Student Portal",
+      "description": "Access your timetable, attendance records, and class transcripts",
+      "features": ["View Timetable", "Check Attendance", "Access Transcripts", "Class Materials"]
+    },
+    "teacher": {
+      "title": "Teacher Dashboard",
+      "description": "Manage classes, input subjects, and track student attendance",
+      "features": ["Create Timetables", "Record Classes", "Manage Attendance", "Generate Reports"]
+    },
+    "admin": {
+      "title": "Admin Panel",
+      "description": "Oversee system resources, generate reports, and manage users",
+      "features": ["System Management", "User Administration", "Analytics Dashboard", "Resource Planning"]
+    }
+  }
+}
