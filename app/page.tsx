@@ -1,222 +1,217 @@
-"use client"
-import { LanguageSelector } from '@/components/language-selector'
-import { UserGuideModal } from '@/components/user-guide-modal'
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import {
-  Users,
-  BookOpen,
-  Mic,
-  BarChart3,
-  Settings,
-  GraduationCap,
-  UserCheck,
-  Clock,
-  Sparkles,
-  Award,
-  TrendingUp,
-} from "lucide-react"
+@import "tailwindcss";
+@import "tw-animate-css";
 
-export default function HomePage() {
-  const [selectedRole, setSelectedRole] = useState<string | null>(null)
-  const [showGuide, setShowGuide] = useState(false) // Added state for User Guide
+@custom-variant dark (&:is(.dark *));
 
-  // Open UserGuide immediately when page loads
-  useEffect(() => {
-    setShowGuide(true)
-  }, [])
+/* Updated to light theme colors for better visibility */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.488 0.243 264.376);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.696 0.17 162.48);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.488 0.243 264.376);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.488 0.243 264.376);
+}
 
-  const roles = [
-    {
-      id: "student",
-      title: "Student Portal",
-      description: "Access your timetable, attendance records, and class transcripts",
-      icon: GraduationCap,
-      color: "bg-gradient-to-r from-purple-600 to-blue-600",
-      features: ["View Timetable", "Check Attendance", "Access Transcripts", "Class Materials"],
-    },
-    {
-      id: "teacher",
-      title: "Teacher Dashboard",
-      description: "Manage classes, input subjects, and track student attendance",
-      icon: UserCheck,
-      color: "bg-gradient-to-r from-amber-400 to-orange-500",
-      features: ["Create Timetables", "Record Classes", "Manage Attendance", "Generate Reports"],
-    },
-    {
-      id: "admin",
-      title: "Admin Panel",
-      description: "Oversee system resources, generate reports, and manage users",
-      icon: Settings,
-      color: "bg-gradient-to-r from-emerald-500 to-teal-600",
-      features: ["System Management", "User Administration", "Analytics Dashboard", "Resource Planning"],
-    },
-  ]
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.488 0.243 264.376);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.696 0.17 162.48);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.488 0.243 264.376);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.488 0.243 264.376);
+}
 
-  const systemFeatures = [
-    {
-      icon: Clock,
-      title: "Dynamic Timetable Generation",
-      description: "AI-powered scheduling with automatic conflict resolution and teacher availability tracking",
-    },
-    {
-      icon: Mic,
-      title: "Class Audio Transcription",
-      description: "Automated recording and transcription of class sessions for absent students",
-    },
-    {
-      icon: BarChart3,
-      title: "Real-time Attendance",
-      description: "Live attendance tracking with visual summaries and historical data",
-    },
-    {
-      icon: Users,
-      title: "Multi-Role Access",
-      description: "Separate dashboards for students, teachers, and administrators",
-    },
-  ]
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
 
-  const stats = [
-    { icon: Award, value: "98%", label: "Attendance Accuracy" },
-    { icon: TrendingUp, value: "45%", label: "Time Saved" },
-    { icon: Sparkles, value: "500+", label: "Schools Using" },
-  ]
-
-  if (selectedRole) {
-    window.location.href = `/${selectedRole}`
-    return null
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 
-  return (
-    <div className="min-h-screen gradient-bg">
-      {/* Header */}
-      <header className="border-b border-white/20 bg-white/80 backdrop-blur-xl sticky top-0 z-50 shadow-royal">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 shadow-royal pulse-glow">
-                <BookOpen className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 via-purple-800 to-indigo-800 bg-clip-text text-transparent">EduFlow</h1>
-                <p className="text-sm text-gray-600">Smart Classroom Management</p>
-              </div>
-            </div>
+  html {
+    scroll-behavior: smooth;
+  }
 
-            <div className="flex items-center gap-4">
-              {/* Language Selector */}
-              <LanguageSelector />
+  /* Royal gradient backgrounds */
+  .gradient-bg {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 25%, #ddd6fe 50%, #e0e7ff 75%, #f1f5f9 100%);
+  }
 
-              {/* Controlled User Guide Modal */}
-              <UserGuideModal open={showGuide} onOpenChange={setShowGuide} />
-            </div>
-          </div>
-        </div>
-      </header>
+  .royal-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="h-6 w-6 text-purple-600 float" />
-            <Badge variant="outline" className="text-purple-600 border-purple-300 bg-purple-50/50 shadow-royal">
-              AI-Powered Education
-            </Badge>
-          </div>
-          <h2 className="text-6xl font-bold text-gray-900 mb-6 text-balance">
-            Revolutionize Your
-            <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent"> Classroom Management</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto text-pretty leading-relaxed">
-            AI-powered timetable generation, real-time attendance tracking, and automated class transcription for modern
-            educational institutions.
-          </p>
-        </div>
+  .royal-gradient-2 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
 
-        <div className="flex justify-center gap-8 mb-16">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <stat.icon className="h-5 w-5 text-purple-600" />
-                <span className="text-2xl font-bold text-gray-900">{stat.value}</span>
-              </div>
-              <p className="text-sm text-gray-600">{stat.label}</p>
-            </div>
-          ))}
-        </div>
+  .royal-gradient-3 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  }
+}
 
-        {/* System Features */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {systemFeatures.map((feature, index) => (
-            <Card key={index} className="card-hover">
-              <CardHeader className="pb-3">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-r from-purple-100 to-blue-100 mb-3 shadow-royal">
-                  <feature.icon className="h-6 w-6 text-purple-600" />
-                </div>
-                <CardTitle className="text-lg">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm leading-relaxed">{feature.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+@layer utilities {
+  /* Royal shadow utilities */
+  .shadow-royal {
+    box-shadow: 0 8px 32px rgba(79, 70, 229, 0.15), 0 4px 16px rgba(147, 51, 234, 0.1);
+  }
 
-        {/* Role Selection */}
-        <div className="text-center mb-12">
-          <h3 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-purple-800 to-indigo-800 bg-clip-text text-transparent mb-3">Choose Your Role</h3>
-          <p className="text-lg text-gray-600">Select your role to access the appropriate dashboard</p>
-        </div>
+  .shadow-royal-lg {
+    box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2), 0 8px 24px rgba(147, 51, 234, 0.15);
+  }
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {roles.map((role) => (
-            <Card
-              key={role.id}
-              className="card-hover cursor-pointer group"
-              onClick={() => setSelectedRole(role.id)}
-            >
-              <CardHeader className="text-center pb-4">
-                <div
-                  className={`flex h-20 w-20 items-center justify-center rounded-2xl ${
-                    role.id === 'student' ? 'bg-gradient-to-r from-purple-600 to-blue-600' : 
-                    role.id === 'teacher' ? 'bg-gradient-to-r from-amber-400 to-orange-500' : 
-                    'bg-gradient-to-r from-emerald-500 to-teal-600'
-                  } mx-auto mb-4 group-hover:scale-110 transition-all duration-300 shadow-royal pulse-glow`}
-                >
-                  <role.icon className="h-8 w-8 text-white" />
-                </div>
-                <CardTitle className="text-xl">{role.title}</CardTitle>
-                <CardDescription className="leading-relaxed">{role.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {role.features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3 text-sm">
-                      <div className="h-2 w-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500" />
-                      {feature}
-                    </div>
-                  ))}
-                </div>
-                <Button className="w-full mt-6 shadow-royal">
-                  Access Dashboard
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+  .shadow-royal-xl {
+    box-shadow: 0 25px 50px rgba(79, 70, 229, 0.25), 0 12px 32px rgba(147, 51, 234, 0.2);
+  }
 
-      {/* Footer */}
-      <footer className="border-t border-white/20 bg-white/30 backdrop-blur-sm mt-20">
-        <div className="container mx-auto px-6 py-8">
-          <div className="text-center text-sm text-gray-600">
-            <p className="font-medium">EduFlow Demo - Smart Classroom Management System</p>
-            <p className="mt-1">Built with modern web technologies for educational excellence</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  )
+  /* Royal hover effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02];
+  }
+
+  .card-hover:hover {
+    box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2), 0 8px 24px rgba(147, 51, 234, 0.15);
+  }
+
+  /* Glassmorphism effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Animated gradients */
+  .animated-gradient {
+    background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* Pulse glow effect */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulseGlow {
+    from { box-shadow: 0 0 20px rgba(79, 70, 229, 0.3); }
+    to { box-shadow: 0 0 30px rgba(79, 70, 229, 0.6), 0 0 40px rgba(147, 51, 234, 0.3); }
+  }
 }

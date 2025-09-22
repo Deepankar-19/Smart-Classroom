@@ -1,207 +1,217 @@
-"use client"
+@import "tailwindcss";
+@import "tw-animate-css";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import {
-  BookOpen,
-  Users,
-  Mic,
-  BarChart3,
-  Settings,
-  GraduationCap,
-  UserCheck,
-  Clock,
-  ChevronRight,
-  X,
-} from "lucide-react"
+@custom-variant dark (&:is(.dark *));
 
-export function UserGuideModal() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [currentStep, setCurrentStep] = useState(0)
+/* Updated to light theme colors for better visibility */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.488 0.243 264.376);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.696 0.17 162.48);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.488 0.243 264.376);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.488 0.243 264.376);
+}
 
-  useEffect(() => {
-    // Show modal on initial load
-    const hasSeenGuide = localStorage.getItem("eduflow-guide-seen")
-    if (!hasSeenGuide) {
-      setIsOpen(true)
-    }
-  }, [])
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.488 0.243 264.376);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.696 0.17 162.48);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.488 0.243 264.376);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.488 0.243 264.376);
+}
 
-  const guideSteps = [
-    {
-      title: "Welcome to EduFlow",
-      description: "Your smart classroom management system",
-      content: (
-        <div className="space-y-4">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary shadow-lg">
-              <BookOpen className="h-6 w-6 text-primary-foreground" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">EduFlow</h3>
-              <p className="text-sm text-muted-foreground">Smart Classroom Management</p>
-            </div>
-          </div>
-          <p className="text-muted-foreground">
-            EduFlow is an AI-powered educational management system designed to streamline classroom operations, track
-            attendance, and provide automated transcription services.
-          </p>
-        </div>
-      ),
-    },
-    {
-      title: "Choose Your Role",
-      description: "Access role-specific dashboards",
-      content: (
-        <div className="space-y-4">
-          <div className="grid gap-3">
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-              <GraduationCap className="h-5 w-5 text-primary" />
-              <div>
-                <p className="font-medium">Student Portal</p>
-                <p className="text-sm text-muted-foreground">View timetables, attendance, and transcripts</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-              <UserCheck className="h-5 w-5 text-accent" />
-              <div>
-                <p className="font-medium">Teacher Dashboard</p>
-                <p className="text-sm text-muted-foreground">Manage classes and track attendance</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-              <Settings className="h-5 w-5 text-chart-3" />
-              <div>
-                <p className="font-medium">Admin Panel</p>
-                <p className="text-sm text-muted-foreground">System management and analytics</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: "Key Features",
-      description: "Explore what EduFlow can do",
-      content: (
-        <div className="space-y-4">
-          <div className="grid gap-3">
-            <div className="flex items-center gap-3">
-              <Clock className="h-5 w-5 text-primary" />
-              <div>
-                <p className="font-medium">AI Timetable Generation</p>
-                <p className="text-sm text-muted-foreground">Automatic scheduling with conflict resolution</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <Mic className="h-5 w-5 text-primary" />
-              <div>
-                <p className="font-medium">Class Transcription</p>
-                <p className="text-sm text-muted-foreground">Automated recording and transcription</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <BarChart3 className="h-5 w-5 text-primary" />
-              <div>
-                <p className="font-medium">Real-time Attendance</p>
-                <p className="text-sm text-muted-foreground">Live tracking with visual summaries</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-primary" />
-              <div>
-                <p className="font-medium">Multi-Role Access</p>
-                <p className="text-sm text-muted-foreground">Separate dashboards for each user type</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: "Language Support",
-      description: "Multi-language interface",
-      content: (
-        <div className="space-y-4">
-          <p className="text-muted-foreground">
-            EduFlow supports multiple languages to serve diverse educational communities:
-          </p>
-          <div className="flex gap-2 flex-wrap">
-            <Badge variant="outline">English</Badge>
-            <Badge variant="outline">Hindi</Badge>
-            <Badge variant="outline">Santali</Badge>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            Look for the language selector in the top-left corner to switch between languages.
-          </p>
-        </div>
-      ),
-    },
-  ]
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
 
-  const handleClose = () => {
-    setIsOpen(false)
-    localStorage.setItem("eduflow-guide-seen", "true")
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 
-  const nextStep = () => {
-    if (currentStep < guideSteps.length - 1) {
-      setCurrentStep(currentStep + 1)
-    } else {
-      handleClose()
-    }
+  html {
+    scroll-behavior: smooth;
   }
 
-  const prevStep = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1)
-    }
+  /* Royal gradient backgrounds */
+  .gradient-bg {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 25%, #ddd6fe 50%, #e0e7ff 75%, #f1f5f9 100%);
   }
 
-  return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <DialogTitle className="text-xl">{guideSteps[currentStep].title}</DialogTitle>
-              <DialogDescription>{guideSteps[currentStep].description}</DialogDescription>
-            </div>
-            <Button variant="ghost" size="sm" onClick={handleClose}>
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-        </DialogHeader>
+  .royal-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
 
-        <div className="py-4">{guideSteps[currentStep].content}</div>
+  .royal-gradient-2 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
 
-        <div className="flex items-center justify-between pt-4 border-t">
-          <div className="flex gap-1">
-            {guideSteps.map((_, index) => (
-              <div
-                key={index}
-                className={`h-2 w-2 rounded-full transition-colors ${
-                  index === currentStep ? "bg-primary" : "bg-muted"
-                }`}
-              />
-            ))}
-          </div>
+  .royal-gradient-3 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  }
+}
 
-          <div className="flex gap-2">
-            {currentStep > 0 && (
-              <Button variant="outline" size="sm" onClick={prevStep}>
-                Previous
-              </Button>
-            )}
-            <Button size="sm" onClick={nextStep}>
-              {currentStep === guideSteps.length - 1 ? "Get Started" : "Next"}
-              <ChevronRight className="h-4 w-4 ml-1" />
-            </Button>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  )
+@layer utilities {
+  /* Royal shadow utilities */
+  .shadow-royal {
+    box-shadow: 0 8px 32px rgba(79, 70, 229, 0.15), 0 4px 16px rgba(147, 51, 234, 0.1);
+  }
+
+  .shadow-royal-lg {
+    box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2), 0 8px 24px rgba(147, 51, 234, 0.15);
+  }
+
+  .shadow-royal-xl {
+    box-shadow: 0 25px 50px rgba(79, 70, 229, 0.25), 0 12px 32px rgba(147, 51, 234, 0.2);
+  }
+
+  /* Royal hover effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02];
+  }
+
+  .card-hover:hover {
+    box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2), 0 8px 24px rgba(147, 51, 234, 0.15);
+  }
+
+  /* Glassmorphism effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Animated gradients */
+  .animated-gradient {
+    background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* Pulse glow effect */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulseGlow {
+    from { box-shadow: 0 0 20px rgba(79, 70, 229, 0.3); }
+    to { box-shadow: 0 0 30px rgba(79, 70, 229, 0.6), 0 0 40px rgba(147, 51, 234, 0.3); }
+  }
 }
